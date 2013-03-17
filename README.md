@@ -35,3 +35,9 @@ This project is using several libraries and frameworks:
 
  - Rails 3.2
  - Grape
+
+## TODO
+
+  - Setup Devise
+  - Document setup steps
+  - Setup minitest testing structure

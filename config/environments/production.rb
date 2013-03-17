@@ -20,6 +20,10 @@ ServerApiTemplate::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Setup host for emails
+  # TODO fill in real domain below
+  config.action_mailer.default_url_options = { :host => 'something.somedomain.com' }
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
