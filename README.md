@@ -14,9 +14,11 @@ to power their applications.
 
 This project is using several libraries and frameworks:
 
- - Rails 3.2 (web framework)
- - Grape  (API endpoints)
- - Devise (authentication)
+ - [Rails 3.2](http://rubyonrails.org/) - web framework
+ - [Grape](http://rdoc.info/github/intridea/grape) - API endpoints
+ - [Devise](https://github.com/plataformatec/devise) - Authentication
+ - [RailsAdmin](https://github.com/sferik/rails_admin) - Database dashboard
+ - [MiniTest](https://github.com/seattlerb/minitest) - Unit testing
 
 ## Installation
 
