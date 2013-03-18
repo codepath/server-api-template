@@ -14,7 +14,7 @@ to power their applications.
 
 This project is using several libraries and frameworks:
 
- - [Rails 3.2](http://rubyonrails.org/) - web framework
+ - [Rails 3.2](http://rubyonrails.org/) - Web Framework
  - [Grape](http://rdoc.info/github/intridea/grape) - API endpoints
  - [Devise](https://github.com/plataformatec/devise) - Authentication
  - [RailsAdmin](https://github.com/sferik/rails_admin) - Database dashboard
@@ -30,20 +30,21 @@ Make sure you have Ruby 1.9.3 and Git installed. Type into the terminal:
 $ ruby -v
 ```
 
-Verify you see "ruby 1.9.3pXXX" (where the XXX can be any number). If not then download and run [RailsInstaller](http://railsinstaller.org/) in order to get Ruby.
-
 Then type into the terminal:
 
 ```bash
 $ git --version
 ```
 
-If you get an error then download and run [RailsInstaller](http://railsinstaller.org/) in order to get Ruby.
+Verify you see "ruby 1.9.3pXXX" (where the XXX can be any number). If not then download and run [RailsInstaller](http://railsinstaller.org/) in order to get Ruby.
 
-### Fork and Clone
+If you get an error of "no git command", then download and run
+[RailsInstaller](http://railsinstaller.org/) in order to get git.
 
-The first step is to register a [github account](https://github.com/) which allows you
-to store your code for free on their servers.
+### GitHub
+
+The first step is to register a [github account](https://github.com/) (if you don't have one yet) which allows you
+to store your code for free on the github servers.
 
 You probably need to [upload your ssh key](https://help.github.com/articles/generating-ssh-keys) to Github
 in order to get or push repositories:
@@ -55,6 +56,8 @@ $ pbcopy < ~/.ssh/id_rsa.pub
 If that command fails with a file not found, run `$ ssh-keygen -t rsa -C "your_email@example.com"` to generate your SSH key.
 
 Next, go to your [ssh keys](https://github.com/settings/ssh) and paste the contents of your clipboard.
+
+### Fork and Clone
 
 Now we need to **fork this repository** to your own account at <https://github.com/thecodepath/server-api-template>.
 You can do that by clicking "Fork" on the top right.
@@ -75,7 +78,7 @@ Run the task to install dependencies:
 $ bundle
 ```
 
-When this is finished, let's start th :
+When this is finished, let's prepare this as a new git repository (for storing code):
 
 ```bash
 $ rm -rf .git
@@ -87,7 +90,7 @@ $ git push origin master --force
 
 **Note:** Be sure to replace `myusername` with your own bitbucket username above for remote.
 
-Now setup your database:
+Now setup your local database for use on your computer:
 
 ```bash
 $ rake db:migrate db:test:prepare
@@ -101,18 +104,32 @@ Once you are setup, be sure to start your Rails application:
 $ rails server
 ```
 
+This starts your API application at <http://localhost:3000> so you
+can try it locally. Try going to <http://localhost:3000/api/v1/sessions>.
+
 ## Building APIs
 
-### Design API Endpoints
+### Define User Stories
 
- - Based on use cases, flesh out API calls needed by mobile client
- - Specify the "type", "url" and "parameters" (i.e "GET /tweets?user_id=5")
+Always start by defining user stories of what the user can do in your app. For example,
+with twitter, you can:
+
+ - Register an account
+ - Post a tweet
+ - See my tweets home timeline
+ - Follow a user
 
 ### Define Schema
+
+Next, define a schema based on resources.
 
  - Identify resources in your application (i.e user, tweets, favorites)
  - Identify attributes of each resource (i.e a tweet has a body, timestamp)
  - Identify the "associations" for each resource (i.e a tweet has a user_id)
+
+For example with twitter, you have a `user` resource and a `tweets` resource
+and a tweet "belongs to" a user. A user has an email and a password and a tweet
+has a body and a timestamp.
 
 ### Create Models
 
