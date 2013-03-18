@@ -3,6 +3,12 @@
 This is our CodePath template for giving people an easy way to create RESTful JSON APIs
 to power their applications.
 
+## Outline
+
+ - [Installation](#installation)
+ - [Building APIs](#building-apis)
+ - [Deploying to Heroku](#deploying)
+
 ## Libraries
 
 This project is using several libraries and frameworks:
@@ -115,9 +121,41 @@ $ rails server
 
 ### Build Grape Resources
 
+In Grape, APIs are defined in terms of "resources" which are different nouns within your application.
+
   - Check out "app/api/endpoints" for various resource endpoint files
   - Add resources into grape endpoint files
   - Write the API endpoint implementation
+
+An API endpoint lives inside of `app/api/endpoints/someresource.rb` where "someresource" is
+the noun being affected by the API. For instance, the API endpoint for registering
+a new user lives in `app/api/endpoints/users` and is described by the following:
+
+```ruby
+resource :users do
+  desc "Register a new user"
+  params do
+    requires :email, type: String, desc: "email for user"
+    requires :password, type: String, desc: "password for user"
+  end
+  post do
+    @user = User.new(params.slice(:email, :password))
+    if @user.save
+      status 201
+      @user.as_json
+    else # user didn't save
+      error!({ :error => "user could not be registered", :details => @user.errors }, 400)
+    end
+  end
+end
+```
+
+Notice that there are three main parts: description (`desc`) for describing the purpose, params for specifying
+required parameters for the API request and then the API code which starts with an HTTP request method such
+as `get`, `post`, `put`, or `delete`.
+
+Other API endpoints would be defined in terms of other resources (tweets, trips, appointments, etc)
+based on the APIs and models in your application.
 
 ## Other Tasks
 
