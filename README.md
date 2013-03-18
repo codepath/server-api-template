@@ -33,11 +33,27 @@ If you get an error then download and run [RailsInstaller](http://railsinstaller
 
 ### Fork and Clone
 
-The first step is to **fork this repository** to your own account at <https://bitbucket.org/codepath/server-api-template>.
+The first step is to register a [github account](https://github.com/) which allows you
+to store your code for free on their servers.
+
+You probably need to [upload your ssh key](https://help.github.com/articles/generating-ssh-keys) to Github
+in order to get or push repositories:
+
+```bash
+$ pbcopy < ~/.ssh/id_rsa.pub
+```
+
+If that command fails with a file not found, run `$ ssh-keygen -t rsa -C "your_email@example.com"` to generate your SSH key.
+
+Next, go to your [ssh keys](https://github.com/settings/ssh) and paste the contents of your clipboard.
+
+Now we need to **fork this repository** to your own account at <https://github.com/thecodepath/server-api-template>.
+You can do that by clicking "Fork" on the top right.
+
 Next, you want to clone your version of this repository locally:
 
 ```bash
-$ git clone git@bitbucket.org:myusername/server-api-template.git
+$ git clone git@github.com:myusername/server-api-template.git
 ```
 
 **Note:** Be sure to replace `myusername` with your own bitbucket username above.
