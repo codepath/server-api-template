@@ -62,6 +62,20 @@ $ git push origin master --force
 
 **Note:** Be sure to replace `myusername` with your own bitbucket username above for remote.
 
+Now setup your database:
+
+```bash
+$ rake db:migrate db:test:prepare
+```
+
+### Running
+
+Once you are setup, be sure to start your Rails application:
+
+```bash
+$ rails server
+```
+
 ## Building APIs
 
 ### Design API Endpoints
@@ -97,6 +111,22 @@ Here's a list of a few other todos:
   - In "app/api/api_router.rb" uncomment lines to create basic authenticated endpoints.
   - In "config/environments/production.rb" fill in the real domain for your application
   - In "config/initializers/airbrake.rb" fill in the token for your free airbrake account (for error reporting)
+
+## Usage
+
+Key files to edit:
+
+  - "app/api/endpoints/*" - Adding endpoints and APIs
+  - "db/migrate" - Defining the model attributes in the database
+  - "app/models" - Defining any additional model information
+  - "test/api"   - Defining tests for your APIs (if needed)
+
+Few URLs to note (once rails server is running):
+
+  - "/api/sessions" - Simple endpoint that returns text
+  - "/rails/routes" - See a list of common rails routes
+  - "/users/sign_in" - Login (or register) a user
+  - "/admin" - Admin panel for viewing database content
 
 ## Deploying
 
