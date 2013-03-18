@@ -11,15 +11,9 @@ module Endpoints
       params do
         requires :email, type: String, desc: "email for user"
         requires :password, type: String, desc: "password for user"
-        requires :first_name, type: String, desc: "first_name for user"
-        requires :last_name, type: String, desc: "last_name for user"
-        optional :dot_id, type: String, desc: "dot_id for user"
-        optional :time_zone, type: String, desc: "timezone for user"
-        optional :cycle, type: String, desc: "cycle for user"
       end
       post do
-        @user = User.new(params.except(:route_info, :version, :role))
-        @user.role = "driver"
+        @user = User.new(params.slice(:email, :password))
         if @user.save
           status 201
           @user.to_json
