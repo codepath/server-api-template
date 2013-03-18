@@ -8,7 +8,8 @@ end
 
 # Routes defined in routes folder
 class ApiRouter < ApiBase
-  # For basic auth (to protect API)
+  #
+  # TODO For basic auth (to protect API)
   #
   # http_basic do |username, password|
   #  username == API_USERNAME && password == API_PASSWORD
@@ -57,5 +58,5 @@ class ApiRouter < ApiBase
   version 'v1', :using => :path
   format :json
   formatter :json, Grape::Formatter::Rabl
-  # load_routes :foo, :bar # Load routes based on
+  load_routes :sessions, :users # Load routes from endpoints folder
 end

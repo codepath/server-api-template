@@ -13,10 +13,11 @@ module Endpoints
         requires :email, type: String, desc: "user's email"
         requires :password, type: String, desc: "user's password"
       end
-      post :authenticate, :rabl => "users/show" do
+      post :authenticate do
         if @user && @user.valid_password?(params[:password])
           @user.update_attributes(:last_sign_in_at => Time.now)
           status 201
+          @user.to_json
         elsif @user.nil?
           error_not_found!(User)
         else # invalid password
