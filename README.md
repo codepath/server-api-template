@@ -98,6 +98,22 @@ Once you are setup, be sure to start your Rails application:
 $ rails server
 ```
 
+## Quick Reference
+
+Key files to edit:
+
+  - "app/api/endpoints/*" - Adding endpoints and APIs
+  - "db/migrate" - Defining the model attributes in the database
+  - "app/models" - Defining any additional model information
+  - "test/api"   - Defining tests for your APIs (if needed)
+
+Few URLs to note (once rails server is running):
+
+  - "/api/sessions" - Simple endpoint that returns text
+  - "/rails/routes" - See a list of common rails routes
+  - "/users/sign_in" - Login (or register) a user
+  - "/admin" - Admin panel for viewing database content
+
 ## Building APIs
 
 ### Design API Endpoints
@@ -201,6 +217,47 @@ As a rule of thumb, the request method to pick is as follows:
 API endpoints are defined in terms of other resources (tweets, trips, appointments, etc)
 based on the APIs and models in your application.
 
+For example, a tweets endpoint for creating (POST) a new tweet would live in `app/api/endpoints/tweets.rb` and
+look like this:
+
+```
+resource :tweets do
+  desc "Create a new tweet"
+  params do
+    requires :body, type: String, desc: "body for tweet"
+    requires :user_id, type: String, desc: "user for tweet"
+  end
+  post do
+    @tweet = Tweet.new(params.slice(:body, :user_id))
+    if @tweet.save
+      status 201
+      @tweet.as_json
+    else # user didn't save
+      error!({ :error => "tweet could not be created", :details => @tweet.errors }, 400)
+    end
+  end
+end
+```
+
+and a method for getting (GET) all tweets for a user might look like:
+
+``
+resource :tweets do
+  desc "Gets a user's tweets"
+  params do
+    requires :user_id, type: String, desc: "user for tweet"
+  end
+  get do
+    @tweets = Tweet.where(:user_id => params[:user_id])
+    @tweets.as_json
+  end
+end
+```
+
+You simply need to identify the resources for you application, what
+actions can be taken on them (create, read, update or delete) and then
+implement the endpoints accordingly.
+
 ## Other Tasks
 
 Here's a list of a few other todos:
@@ -209,22 +266,6 @@ Here's a list of a few other todos:
   - In "app/api/api_router.rb" uncomment lines to create basic authenticated endpoints.
   - In "config/environments/production.rb" fill in the real domain for your application
   - In "config/initializers/airbrake.rb" fill in the token for your free airbrake account (for error reporting)
-
-## Usage
-
-Key files to edit:
-
-  - "app/api/endpoints/*" - Adding endpoints and APIs
-  - "db/migrate" - Defining the model attributes in the database
-  - "app/models" - Defining any additional model information
-  - "test/api"   - Defining tests for your APIs (if needed)
-
-Few URLs to note (once rails server is running):
-
-  - "/api/sessions" - Simple endpoint that returns text
-  - "/rails/routes" - See a list of common rails routes
-  - "/users/sign_in" - Login (or register) a user
-  - "/admin" - Admin panel for viewing database content
 
 ## Deploying
 
