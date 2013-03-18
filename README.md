@@ -144,9 +144,9 @@ tweet = Tweet.create(:body => "foo", :user_id => 1)
 # update
 tweet.update_attribute(:body, "bar")
 # find
-my_tweet = Tweet.where(:body => "bar")
+my_tweet = Tweet.where(:body => "bar").first
 # delete
-tweet.delete
+my_tweet.delete
 ```
 
 Once we have our models, we can build the related API endpoints so our client mobile applications
@@ -155,10 +155,12 @@ can modify the resources.
 ### Build Grape Resources
 
 In Grape, APIs are defined in terms of "resources" which are different nouns within your application.
+An 'endpoint' is a URL that creates, updates, returns or deletes resource data. For example, creating a new
+tweet, returning a list of tweets, deleting a tweet, et al. On a high level, APIs are defined through:
 
-  - Check out `app/api/endpoints` for various resource endpoint files
+  - Editing `app/api/endpoints` for various resource endpoint files
   - Add resource declarations into grape endpoint files
-  - Write the API endpoint code
+  - Write the endpoint code for each resource API
 
 An API endpoint lives inside of `app/api/endpoints/someresource.rb` where "someresource" is
 the noun being affected by the API. For instance, the API endpoint for registering
