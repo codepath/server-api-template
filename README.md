@@ -113,23 +113,56 @@ $ rails server
 
 ### Create Models
 
+Models are the way that a Rails application stores data for your application resources.
+On a high level:
+
   - Use `rails g model <NAME>` to generate models for each resource
     - `rails g model Tweet`
   - Fill out the "db/migrate/xxxxx" file for each model
   - Fill out associations for each model (i.e `belongs_to :user`)
   - Fill out any validations for each model (i.e `validates :body, :presence => true`)
 
+For example, imagine we want to create a "Tweet" resource that has a status and is created by a user. First,
+we would generate the tweet resource:
+
+```bash
+$ rails g model tweet body:string user_id:integer
+```
+
+This will generate a file in `db/migrate/xxxxxx_create_tweets.rb` that defines the fields
+for the tweet (right now just a body and a number representing the user).
+
+Now we can run the migrations with `rake db:migrate` and then check out our
+model file at `app/models/tweet.rb`. Models are blank by default and often don't need any
+additional code. The fields (body and user_id) will work automatically.
+
+We can now create, update or destroy tweets from within our APIs:
+
+```ruby
+# create
+tweet = Tweet.create(:body => "foo", :user_id => 1)
+# update
+tweet.update_attribute(:body, "bar")
+# find
+my_tweet = Tweet.where(:body => "bar")
+# delete
+tweet.delete
+```
+
+Once we have our models, we can build the related API endpoints so our client mobile applications
+can modify the resources.
+
 ### Build Grape Resources
 
 In Grape, APIs are defined in terms of "resources" which are different nouns within your application.
 
-  - Check out "app/api/endpoints" for various resource endpoint files
-  - Add resources into grape endpoint files
-  - Write the API endpoint implementation
+  - Check out `app/api/endpoints` for various resource endpoint files
+  - Add resource declarations into grape endpoint files
+  - Write the API endpoint code
 
 An API endpoint lives inside of `app/api/endpoints/someresource.rb` where "someresource" is
 the noun being affected by the API. For instance, the API endpoint for registering
-a new user lives in `app/api/endpoints/users` and is described by the following:
+a new user lives in `app/api/endpoints/users.rb` and is described by the following:
 
 ```ruby
 resource :users do
