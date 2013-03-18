@@ -1,10 +1,10 @@
 require "grape"
-require "rabl"
-require "grape/rabl"
+# require "rabl"
+# require "grape/rabl"
 
-Rabl.configure do |c|
-  c.view_paths = [Rails.root.join("app/views")]
-end
+# Rabl.configure do |c|
+#   c.view_paths = [Rails.root.join("app/views")]
+# end
 
 # Routes defined in routes folder
 class ApiRouter < ApiBase
@@ -15,6 +15,12 @@ class ApiRouter < ApiBase
   #  username == API_USERNAME && password == API_PASSWORD
   # end
 
+  version 'v1', :using => :path, :cascade => false
+  format :json
+  # formatter :json, Grape::Formatter::Rabl
+  load_routes :sessions, :users # Load routes from endpoints folder
+
+  # Exception handling
   rescue_from :all do |e|
     if e.kind_of?(Grape::Exceptions::Base) # validation error
       rack_response({ error: e.message }.to_json, e.status)
@@ -54,9 +60,4 @@ class ApiRouter < ApiBase
       @current_user ||= User.find(Integer(env['HTTP_X_USER_AUTH'])) if env['HTTP_X_USER_AUTH'].present?
     end
   end
-
-  version 'v1', :using => :path
-  format :json
-  formatter :json, Grape::Formatter::Rabl
-  load_routes :sessions, :users # Load routes from endpoints folder
 end

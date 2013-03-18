@@ -1,6 +1,9 @@
 ServerApiTemplate::Application.routes.draw do
+  mount ApiRouter => '/api'
+
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  mount_sextant if Rails.env.development?
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

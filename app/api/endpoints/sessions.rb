@@ -1,12 +1,13 @@
 module Endpoints
   class Sessions < Grape::API
+    format :json
+
     before do
       @user = User.find_for_authentication(:email => params[:email]) if params[:email].present?
     end
 
     resource :sessions do
-
-      # POST /sessions/authenticate?email=<s>&password=<s>
+      # POST /api/sessions/authenticate?email=<s>&password=<s>
       # Returns 201, 400
       desc "Authenticates a user given email and password"
       params do
@@ -17,7 +18,7 @@ module Endpoints
         if @user && @user.valid_password?(params[:password])
           @user.update_attributes(:last_sign_in_at => Time.now)
           status 201
-          @user.to_json
+          @user.as_json
         elsif @user.nil?
           error_not_found!(User)
         else # invalid password

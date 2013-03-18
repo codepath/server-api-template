@@ -25,9 +25,9 @@ module ServerApiTemplate
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
-    config.autoload_paths += %W(#{config.root}/api)
-    config.autoload_paths += Dir["#{config.root}/api/**/*"]
-    config.paths.add "#{config.root}/api", :glob => "**/*.rb"
+    config.autoload_paths += %W(#{config.root}/app/api)
+    config.autoload_paths += Dir["#{config.root}/app/api/**/*"]
+    config.paths.add "#{config.root}/app/api", :glob => "**/*.rb"
 
     # Forcing your application to not access the DB or load models when precompiling your assets.
     config.assets.initialize_on_precompile = false
