@@ -7,6 +7,7 @@ to power their applications.
 
  - [Installation](#installation)
  - [Building APIs](#building-apis)
+ - [Quick Reference](#quick-reference)
  - [Deploying to Heroku](#deploying)
 
 ## Libraries
@@ -97,22 +98,6 @@ Once you are setup, be sure to start your Rails application:
 ```bash
 $ rails server
 ```
-
-## Quick Reference
-
-Key files to edit:
-
-  - "app/api/endpoints/*" - Adding endpoints and APIs
-  - "db/migrate" - Defining the model attributes in the database
-  - "app/models" - Defining any additional model information
-  - "test/api"   - Defining tests for your APIs (if needed)
-
-Few URLs to note (once rails server is running):
-
-  - "/api/sessions" - Simple endpoint that returns text
-  - "/rails/routes" - See a list of common rails routes
-  - "/users/sign_in" - Login (or register) a user
-  - "/admin" - Admin panel for viewing database content
 
 ## Building APIs
 
@@ -205,14 +190,8 @@ Notice that there are three main parts: description (`desc`) for describing the 
 required parameters for the API request and then the API code which starts with an HTTP request method such
 as `get`, `post`, `put`, or `delete`.
 
-As a rule of thumb, the request method to pick is as follows:
-
-|Method|Description|Example|
-| ------ | ------ | ----- |
-|get|For returning resources from read-only endpoint|Get user tweets|
-|post|For creating new resources|Create new tweet|
-|put|For updating an existing resource|Editing a user's password|
-|delete|For deleting a resource|Trashing a tweet|
+Be sure to check out the [quick reference](#quick-reference) for better notes on how to
+select a request method and/or response status codes.
 
 API endpoints are defined in terms of other resources (tweets, trips, appointments, etc)
 based on the APIs and models in your application.
@@ -220,7 +199,7 @@ based on the APIs and models in your application.
 For example, a tweets endpoint for creating (POST) a new tweet would live in `app/api/endpoints/tweets.rb` and
 look like this:
 
-```
+```ruby
 resource :tweets do
   desc "Create a new tweet"
   params do
@@ -241,7 +220,7 @@ end
 
 and a method for getting (GET) all tweets for a user might look like:
 
-``
+```ruby
 resource :tweets do
   desc "Gets a user's tweets"
   params do
@@ -266,6 +245,49 @@ Here's a list of a few other todos:
   - In "app/api/api_router.rb" uncomment lines to create basic authenticated endpoints.
   - In "config/environments/production.rb" fill in the real domain for your application
   - In "config/initializers/airbrake.rb" fill in the token for your free airbrake account (for error reporting)
+
+## Quick Reference
+
+### Key files
+
+Key files to edit:
+
+  - "app/api/endpoints/*" - Adding endpoints and APIs
+  - "db/migrate" - Defining the model attributes in the database
+  - "app/models" - Defining any additional model information
+  - "test/api"   - Defining tests for your APIs (if needed)
+
+### Key URLs
+
+Few URLs to note (once rails server is running):
+
+  - "/api/sessions" - Simple endpoint that returns text
+  - "/rails/routes" - See a list of common rails routes
+  - "/users/sign_in" - Login (or register) a user
+  - "/admin" - Admin panel for viewing database content
+
+### Request Methods
+
+As a rule of thumb, the request method to pick is as follows:
+
+|Method|Description|Example|
+| ------ | ------ | ----- |
+|get|For returning resources from read-only endpoint|Get user tweets|
+|post|For creating new resources|Create new tweet|
+|put|For updating an existing resource|Editing a user's password|
+|delete|For deleting a resource|Trashing a tweet|
+
+
+### Response Status Codes
+
+Another thing to notice is `status` codes in the response, as a rule of thumb:
+
+|Status|Description|Example|
+| ------ | ------ | ----- |
+|200|Success|Retrieved list of user tweets|
+|post|For creating new resources|Create new tweet|
+|put|For updating an existing resource|Editing a user's password|
+|delete|For deleting a resource|Trashing a tweet|
 
 ## Deploying
 
