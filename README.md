@@ -192,6 +192,7 @@ as `get`, `post`, `put`, or `delete`.
 As a rule of thumb, the request method to pick is as follows:
 
 |Method|Description|Example|
+| ------ | ------ | ----- |
 |get|For returning resources from read-only endpoint|Get user tweets|
 |post|For creating new resources|Create new tweet|
 |put|For updating an existing resource|Editing a user's password|
