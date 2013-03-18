@@ -7,6 +7,17 @@ gem 'rails', '3.2.12'
 
 gem 'sqlite3'
 
+gem 'devise'
+gem 'rails_admin'
+gem "airbrake"
+
+group :development do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,3 +47,20 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+# Test requirements
+group :test do
+  gem "colorize"
+  gem 'minitest-spec-rails'
+  gem 'minitest'
+  gem "minitest-metadata"
+  gem 'sqlite3'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'faker'
+  gem 'mocha', :require => false
+  gem 'rack-test', :require => "rack/test"
+  gem 'database_cleaner'
+  gem 'fakeweb'
+  gem 'timecop'
+  gem 'database_cleaner'
+end
