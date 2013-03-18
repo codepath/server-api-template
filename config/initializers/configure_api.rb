@@ -2,10 +2,7 @@
 API_USERNAME = "..."
 API_PASSWORD = "..."
 
-require File.dirname(__FILE__) + '/../../lib/smart_params_parser'
-
-# ServerApiTemplate::Application.config.middleware.swap ActionDispatch::ParamsParser,
-#  SmartParamsParser, :ignore_prefix => '/api'
+SafeYAML::OPTIONS[:default_mode] = :safe
 
 # Auto-reload API files
 if Rails.env.development?

@@ -18,7 +18,6 @@ class ApiRouter < ApiBase
   version 'v1', :using => :path, :cascade => false
   format :json
   # formatter :json, Grape::Formatter::Rabl
-  load_routes :sessions, :users # Load routes from endpoints folder
 
   # Exception handling
   rescue_from :all do |e|
@@ -60,4 +59,7 @@ class ApiRouter < ApiBase
       @current_user ||= User.find(Integer(env['HTTP_X_USER_AUTH'])) if env['HTTP_X_USER_AUTH'].present?
     end
   end
+
+  # Load routes from endpoints folder
+  load_routes :sessions, :users
 end
