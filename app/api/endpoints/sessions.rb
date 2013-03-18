@@ -7,6 +7,11 @@ module Endpoints
     end
 
     resource :sessions do
+      # GET /api/sessions
+      get do
+        "This is a sign that the API endpoints are configured"
+      end
+
       # POST /api/sessions/authenticate?email=<s>&password=<s>
       # Returns 201, 400
       desc "Authenticates a user given email and password"

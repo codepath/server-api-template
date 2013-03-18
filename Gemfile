@@ -13,9 +13,9 @@ gem 'grape'
 gem 'devise'
 gem 'rails_admin'
 gem "airbrake"
+gem 'thin'
 
 group :development do
-  gem 'thin'
   gem 'sqlite3'
   gem 'sextant'
 end
