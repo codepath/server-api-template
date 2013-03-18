@@ -17,7 +17,7 @@ This project is using several libraries and frameworks:
 
 Make sure you have Ruby 1.9.3 and Git installed. Type into the terminal:
 
-```
+```bash
 $ ruby -v
 ```
 
@@ -25,7 +25,7 @@ Verify you see "ruby 1.9.3pXXX" (where the XXX can be any number). If not then d
 
 Then type into the terminal:
 
-```
+```bash
 $ git --version
 ```
 
