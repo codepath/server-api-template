@@ -189,7 +189,15 @@ Notice that there are three main parts: description (`desc`) for describing the 
 required parameters for the API request and then the API code which starts with an HTTP request method such
 as `get`, `post`, `put`, or `delete`.
 
-Other API endpoints would be defined in terms of other resources (tweets, trips, appointments, etc)
+As a rule of thumb, the request method to pick is as follows:
+
+|Method|Description|Example|
+|get|For returning resources from read-only endpoint|Get user tweets|
+|post|For creating new resources|Create new tweet|
+|put|For updating an existing resource|Editing a user's password|
+|delete|For deleting a resource|Trashing a tweet|
+
+API endpoints are defined in terms of other resources (tweets, trips, appointments, etc)
 based on the APIs and models in your application.
 
 ## Other Tasks
