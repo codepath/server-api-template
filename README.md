@@ -280,14 +280,15 @@ As a rule of thumb, the request method to pick is as follows:
 
 ### Response Status Codes
 
-Another thing to notice is `status` codes in the response, as a rule of thumb:
+Another thing to notice is API response `status` codes, as a rule of thumb:
 
 |Status|Description|Example|
 | ------ | ------ | ----- |
 |200|Success|Retrieved list of user tweets|
-|post|For creating new resources|Create new tweet|
-|put|For updating an existing resource|Editing a user's password|
-|delete|For deleting a resource|Trashing a tweet|
+|201|Created|Create new tweet|
+|400|Bad request|Invalid email for registration|
+|401|Unauthorized|No permission or not logged in|
+|500|Error|Exception happened on server|
 
 ## Deploying
 
